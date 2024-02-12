@@ -7,7 +7,8 @@ public class PerlinTest : MonoBehaviour
     public int xSize;
     public int zSize;
     public float waterLevel = 0.5f;
-    public float frequency = 1.1f;
+    public float Frequency;
+    private float trueFrequency = 1.1f;
     public float FrameLimit = 1;
   
     //
@@ -72,9 +73,9 @@ public class PerlinTest : MonoBehaviour
                     }
                     float nx = (float)x;
                     float nz = (float)z;
-                    float noise = Mathf.PerlinNoise(nx * frequency, nz * frequency);
+                    float noise = Mathf.PerlinNoise(nx * trueFrequency, nz * trueFrequency);
                     GameObject current = objects[x, z];
-                    current.transform.position = new Vector3(x * 1.1f, noise, z * 1.1f);
+                    current.transform.position = new Vector3(x * 1.1f, noise*10, z * 1.1f);
                     current.GetComponent<MeshRenderer>().material = noise <= waterLevel ? Water : ground;
 
                 }
@@ -85,6 +86,7 @@ public class PerlinTest : MonoBehaviour
     }
     private void OnValidate()
     {
+        trueFrequency = Frequency / 100;
         StartCoroutine(AdjustPerlin());
 
     }
