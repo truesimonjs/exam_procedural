@@ -87,7 +87,7 @@ public class PerlinTest : MonoBehaviour
     private void OnValidate()
     {
         trueFrequency = Frequency / 100;
-        StartCoroutine(AdjustPerlin());
+        if (objects != null) StartCoroutine(AdjustPerlin());
 
     }
 
