@@ -16,7 +16,7 @@ public class PerlinNoise : ScriptableObject
   
     public float getPerlinCoord(uint xCoord,uint yCoord)
     {
-        if (map ==null||xCoord > map.GetLength(0) || yCoord > map.GetLength(1)) GeneratePerlin((int)xCoord, (int)yCoord);
+        if (map ==null||xCoord >= map.GetLength(0) || yCoord >= map.GetLength(1)) GeneratePerlin((int)xCoord+1, (int)yCoord+1);
         return map[xCoord, yCoord];
 
     }
