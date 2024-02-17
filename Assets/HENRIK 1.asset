@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: HENRIK 1
   m_EditorClassIdentifier: 
   seed: {x: 0, y: 0}
-  ridged: 1
+  ridged: 0
   Frequency: 0.73
   min: 0
+  octaves: 2
   splines:
   - {x: 0, y: 50}
-  - {x: 0.05, y: 76}
+  - {x: 0.35, y: 76}
   - {x: 0.36, y: 80}
   - {x: 0.43, y: 83.2}
   - {x: 0.9, y: 150}

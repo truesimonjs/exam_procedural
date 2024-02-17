@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce28d943552b7024ba85952ad9e3dcce, type: 3}
-  m_Name: plains
+  m_Name: HENRIK 2
   m_EditorClassIdentifier: 
-  seed: {x: 0, y: 0}
+  seed: {x: 706.9, y: 48.87}
   ridged: 0
-  Frequency: 1.1
+  Frequency: 0.25
   min: 0
-  octaves: 1
+  octaves: 4
   splines:
-  - {x: 0, y: 50}
-  - {x: 0.25, y: 76}
-  - {x: 0.33, y: 76}
-  - {x: 0.8, y: 83.1}
-  - {x: 0.95, y: 100}
+  - {x: 0.15, y: 65.5}
+  - {x: 0.46, y: 77.9}
+  - {x: 0.62, y: 150}
+  - {x: 0.82, y: 200}

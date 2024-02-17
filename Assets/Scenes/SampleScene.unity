@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4459864851310106426, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: far clip plane
@@ -192,53 +192,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
---- !u!1 &193038831
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 193038832}
-  - component: {fileID: 193038833}
-  m_Layer: 0
-  m_Name: ChunkMaker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &193038832
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193038831}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &193038833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193038831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec2cb48d14060c4aa7707ad00f46d53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xSize: 10
-  zSize: 10
-  ChunkPrefab: {fileID: 1487055463522661674, guid: f709736405b63c44594eaae3e4a5111d, type: 3}
 --- !u!114 &565326835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,16 +199,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8296810548574759212}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01a06b477eaab1845bf8808321ed19d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generateInEditor: 0
   xSize: 250
   zSize: 250
   waterLevel: 75
   sameHeight: 0
-  perlinNoise: {fileID: 11400000, guid: 1bdec8c3aeb82e040b5b9180a4e053a8, type: 2}
+  perlinNoise: {fileID: 11400000, guid: 3e4d23a5bbff3f741ab880bc4e8f216a, type: 2}
   waterPerlin: {fileID: 11400000, guid: a86ea1817ced1574d8217a9c98dc97f3, type: 2}
   prefab: {fileID: 8635846995776380635, guid: 1fc561f404dbb05439d96c2835208cfd, type: 3}
   ground: {fileID: 2100000, guid: bf9f75127af669c48a7d3d3961dc2461, type: 2}
@@ -400,7 +354,6 @@ GameObject:
   - component: {fileID: 332016403596098601}
   - component: {fileID: 7572082792149015803}
   - component: {fileID: 565326835}
-  - component: {fileID: 8296810548574759213}
   m_Layer: 0
   m_Name: Perlin Generator
   m_TagString: Untagged
@@ -408,20 +361,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8296810548574759213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8296810548574759212}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03d8b0b5c4cae9049b6be2befb9fd049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 8635846995776380635, guid: 1fc561f404dbb05439d96c2835208cfd, type: 3}
-  noisemap: {fileID: 11400000, guid: 1bdec8c3aeb82e040b5b9180a4e053a8, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -429,4 +368,3 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 332016403596098601}
   - {fileID: 93391222}
-  - {fileID: 193038832}

@@ -16,6 +16,7 @@ MonoBehaviour:
   ridged: 0
   Frequency: 1
   min: 0
+  octaves: 2
   splines:
   - {x: 0, y: 50}
   - {x: 0.55, y: 100}

@@ -11,6 +11,7 @@ public class PerlinNoise : ScriptableObject
     public bool ridged = false;
     public float Frequency;
     public float min;
+    public int octaves = 1;
     private float[,] map;
     public List<Vector2> splines = new List<Vector2>();
   
@@ -34,7 +35,13 @@ public class PerlinNoise : ScriptableObject
 
                     float nx = (float)x+seed.x;
                     float ny = (float)z+seed.y;
-                    float noise = Mathf.PerlinNoise(nx * trueFrequency, ny * trueFrequency);
+                    float noise= 0;
+                for (int i = 1; i <= octaves; i++)
+                {
+                    noise += Mathf.PerlinNoise(nx * trueFrequency*i, ny * trueFrequency*i)/octaves;
+
+                }
+
                     if (ridged) noise = Mathf.Abs( (noise - 0.5f) * 2);
                      noise = UseSplines(noise);
                     newMap[x, z] = noise;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class ChunkScript : MonoBehaviour
 {
@@ -10,24 +11,30 @@ public class ChunkScript : MonoBehaviour
     private GameObject[,] myBlocks = new GameObject[16,16];
     public GameObject prefab;
     public PerlinNoise noisemap;
+    [HideInInspector] public bool Priority = false;
     private void Start()
+    {
+        GenerateChunk();
+        
+    }
+
+    private async void GenerateChunk()
     {
         for (int x = 0; x < size; x++)
         {
             for (int z = 0; z < size; z++)
             {
-              
-                myBlocks[x, z] = Instantiate(prefab, new Vector3(), Quaternion.identity,transform);
-                //-0.5 to adjust for size of blocks, +1 to adjust for the fact that it counts from 0 and not 1 = 0.5
+                if (!Priority) await Task.Yield();
+                myBlocks[x, z] = Instantiate(prefab, new Vector3(), Quaternion.identity, transform);
 
-                myBlocks[x,z].transform.SetLocalPositionAndRotation(Vector3.forward*z+Vector3.right*x, Quaternion.identity);
+
+                myBlocks[x, z].transform.SetLocalPositionAndRotation(Vector3.forward * z + Vector3.right * x, Quaternion.identity);
                 float xPos = myBlocks[x, z].transform.position.x;
                 float zPos = myBlocks[x, z].transform.position.z;
                 float noise = noisemap.getPerlinCoord((uint)xPos, (uint)zPos);
-               
-                myBlocks[x,z].transform.position = new Vector3(xPos, noise,zPos);
+
+                myBlocks[x, z].transform.position = new Vector3(xPos, noise, zPos);
             }
         }
-        
     }
 }

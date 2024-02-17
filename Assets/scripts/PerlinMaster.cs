@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 public class PerlinMaster : MonoBehaviour
 {
+    public bool generateInEditor = false;
     public int xSize;
     public int zSize;
     public float waterLevel = 0.5f;
@@ -37,7 +38,7 @@ public class PerlinMaster : MonoBehaviour
             {
                 bool isBelowWater = map[x, z] <= waterLevel;
                 if (isBelowWater||sameHeight) map[x, z] = waterLevel;
-                objects[x, z].transform.position = new Vector3(objects[x, z].transform.position.x, map[x,z]*1, objects[x, z].transform.position.z);
+                objects[x, z].transform.position = new Vector3(objects[x, z].transform.position.x, map[x,z], objects[x, z].transform.position.z);
                 
                 objects[x,z].GetComponentInChildren<MeshRenderer>().material = isBelowWater ? Water : ground;
 
@@ -71,6 +72,8 @@ public class PerlinMaster : MonoBehaviour
     
     public void OnValidate()
     {
+       
+        
         if (objects != null) GeneratePerlin();
 
     }
