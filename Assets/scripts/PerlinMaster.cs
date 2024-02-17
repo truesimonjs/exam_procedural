@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class PerlinMaster : MonoBehaviour
 {
-    public bool generateInEditor = false;
+    public bool generate = false;
     public int xSize;
     public int zSize;
     public float waterLevel = 0.5f;
@@ -17,6 +17,7 @@ public class PerlinMaster : MonoBehaviour
     //
     public GameObject prefab;
     public GameObject[,] objects;
+    private GameObject blockParent;
     //material
     public Material ground;
     public Material Water;
@@ -51,6 +52,8 @@ public class PerlinMaster : MonoBehaviour
 
     public void GenerateBlocks()
     {
+        if (blockParent == null) blockParent = Instantiate(new GameObject(), transform);
+        blockParent.name = "Generated Terrain";
         if (objects != null)
         foreach (GameObject element in objects)
         {
@@ -63,7 +66,7 @@ public class PerlinMaster : MonoBehaviour
         {
             for (int z = 0; z < zSize; z++)
             {
-                objects[x, z] = Instantiate(prefab, new Vector3(x,0,z),Quaternion.identity,this.transform);
+                objects[x, z] = Instantiate(prefab, new Vector3(x+transform.position.x,0,z+transform.position.z),Quaternion.identity,blockParent.transform);
                 
 
             }
@@ -72,9 +75,14 @@ public class PerlinMaster : MonoBehaviour
     
     public void OnValidate()
     {
-       
+       if (generate)
+        {
+            generate = false;
+            GenerateBlocks();
+            GeneratePerlin();
+        }
         
-        if (objects != null) GeneratePerlin();
+        if (Application.isPlaying&&objects != null) GeneratePerlin();
 
     }
 }
