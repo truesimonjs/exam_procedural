@@ -18,7 +18,9 @@ MonoBehaviour:
   min: 0
   octaves: 4
   splines:
-  - {x: 0.15, y: 65.5}
+  - {x: 0.08, y: 65.5}
   - {x: 0.46, y: 77.9}
   - {x: 0.62, y: 150}
   - {x: 0.82, y: 200}
+  xSize: 100
+  ySize: 100

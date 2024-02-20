@@ -13,7 +13,7 @@ public class PerlinMaster : MonoBehaviour
     public bool sameHeight = false;
     //perlin noises
     public PerlinNoise perlinNoise;
-    public PerlinNoise waterPerlin;
+
     //
     public GameObject prefab;
     public GameObject[,] objects;
@@ -31,15 +31,18 @@ public class PerlinMaster : MonoBehaviour
     public void GeneratePerlin()
     {
         //float[,] waterMap = waterPerlin.GeneratePerlin(xSize, zSize);
-        float[,] map =  perlinNoise.GeneratePerlin(xSize,zSize);
+        //float[,] map =  perlinNoise.GeneratePerlin(xSize,zSize);
 
         for (int x = 0; x < xSize; x++)
         {
             for (int z = 0; z < zSize; z++)
             {
-                bool isBelowWater = map[x, z] <= waterLevel;
-                if (isBelowWater||sameHeight) map[x, z] = waterLevel;
-                objects[x, z].transform.position = new Vector3(objects[x, z].transform.position.x, map[x,z], objects[x, z].transform.position.z);
+                uint xPos = (uint)(x + transform.position.x);
+                uint zPos = (uint)(z + transform.position.z);
+                float height = perlinNoise.getPerlinCoord(xPos, zPos);
+                bool isBelowWater = height <= waterLevel;
+                if (isBelowWater||sameHeight) height = waterLevel;
+                objects[x, z].transform.position = new Vector3(objects[x, z].transform.position.x, height, objects[x, z].transform.position.z);
                 
                 objects[x,z].GetComponentInChildren<MeshRenderer>().material = isBelowWater ? Water : ground;
 

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Diagnostics;
+
 using System.Threading.Tasks;
 [CreateAssetMenu(fileName = "perlinGen", menuName = "ScriptableObjects/PerlinNoise", order = 1)]
 public class PerlinNoise : ScriptableObject
@@ -12,17 +12,38 @@ public class PerlinNoise : ScriptableObject
     public float Frequency;
     public float min;
     public int octaves = 1;
-    private float[,] map;
+    public float[,] map;
     public List<Vector2> splines = new List<Vector2>();
+    public int xSize;
+    public int ySize;
   
     public float getPerlinCoord(uint xCoord,uint yCoord)
     {
+        /*
         if (map ==null||xCoord >= map.GetLength(0) || yCoord >= map.GetLength(1)) GeneratePerlin((int)xCoord+1, (int)yCoord+1);
         return map[xCoord, yCoord];
+        */
+
+
+        float nx = (float)xCoord + seed.x;
+        float ny = (float)yCoord + seed.y;
+        float noise = 0;
+        float trueFrequency = Frequency / 100;
+        for (int i = 1; i <= octaves; i++)
+        {
+            noise += Mathf.PerlinNoise(nx * trueFrequency * i, ny * trueFrequency * i) / octaves;
+
+        }
+
+        if (ridged) noise = Mathf.Abs((noise - 0.5f) * 2);
+        noise = UseSplines(noise);
+        return noise;
+
 
     }
     public float[,] GeneratePerlin(int sizeX, int sizeY)
     {
+        Debug.Log("generateperlin");
         float trueFrequency  = Frequency / 100;
         float[,] newMap = new float[sizeX, sizeY];  
              
@@ -52,6 +73,8 @@ public class PerlinNoise : ScriptableObject
 
             }
         map = newMap;
+        xSize = map.GetLength(0);
+        ySize = map.GetLength(1);
         return newMap;
     }
     public float UseSplines(float input)
@@ -71,7 +94,8 @@ public class PerlinNoise : ScriptableObject
     private void OnValidate()
     {
         GameObject.FindFirstObjectByType<PerlinMaster>()?.OnValidate();
-        GeneratePerlin(100, 100);
+       
+     
     }
 }
 
