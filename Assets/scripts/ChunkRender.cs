@@ -1,28 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChunkRender : MonoBehaviour
 {
-   public GameObject[] NextTo = new GameObject[4];
-
+    public float renderDistance = 100;
     public Transform player;
-
+    PerlinMaster perlinMaster;
+    public GameObject prefab;
+    private void Start()
+    {
+        perlinMaster = GetComponent<PerlinMaster>();
+    }
     private void Update()
     {
-        Vector3 playerPos = new Vector3(player.position.x, 0, player.position.z);
-        if (Vector3.Distance(playerPos, transform.position)<32)
+        if (Vector3.Distance(transform.position, player.position) < renderDistance)
         {
-            for (int i = 0; i < NextTo.Length; i++)
+            for (int i = 1; i < 5; i++)
             {
-                Debug.Log(NextTo[i] == null);
-                if (NextTo[i] != null) NextTo[i].SetActive(true);
-                else
+                int x, z;
+                utillity.DirectionLoop(i, out x, out z);
+           
+                x += perlinMaster.chunkPos.x;
+                z += perlinMaster.chunkPos.y;
+                if (x < 0 || z < 0) continue;
+                if (PerlinMaster.chunks[x, z] == null)
                 {
-                    int x=0;
-                    int z=0;
-                    utillity.DirectionLoop(i + 1, ref x, ref z);
-                   //NextTo[i] = Instantiate(this.gameObject,transform.position+ new Vector3(x*16,0,z*16), Quaternion.identity).gameObject;
+                    Instantiate(prefab, new Vector3(x*100, 0, z*100), Quaternion.identity);
                 }
             }
         }

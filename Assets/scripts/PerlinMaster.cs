@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Threading.Tasks;
 
 
 public class PerlinMaster : MonoBehaviour
 {
-    public bool generate = false;
+    public static PerlinMaster[,] chunks = new PerlinMaster[100, 100];
     public int xSize;
     public int zSize;
+    //
+    public Vector2Int chunkPos;
+    public bool generate = false;
     public float waterLevel = 0.5f;
     public bool sameHeight = false;
     //perlin noises
@@ -23,9 +23,15 @@ public class PerlinMaster : MonoBehaviour
     public Material Water;
     private void Start()
     {
-     
+
+
+        int x = (int)transform.position.x / xSize;
+        int z = (int)transform.position.z / zSize;
+        chunkPos = new Vector2Int(x, z);
+        chunks[x, z] = this;
+
         GenerateBlocks();
-        GeneratePerlin();
+        //GeneratePerlin();
 
     }
     public void GeneratePerlin()
@@ -41,51 +47,59 @@ public class PerlinMaster : MonoBehaviour
                 uint zPos = (uint)(z + transform.position.z);
                 float height = perlinNoise.getPerlinCoord(xPos, zPos);
                 bool isBelowWater = height <= waterLevel;
-                if (isBelowWater||sameHeight) height = waterLevel;
+                if (isBelowWater || sameHeight) height = waterLevel;
                 objects[x, z].transform.position = new Vector3(objects[x, z].transform.position.x, height, objects[x, z].transform.position.z);
-                
-                objects[x,z].GetComponentInChildren<MeshRenderer>().material = isBelowWater ? Water : ground;
+
+                objects[x, z].GetComponentInChildren<MeshRenderer>().material = isBelowWater ? Water : ground;
 
             }
         }
-       // StaticBatchingUtility.Combine(this.gameObject);
-        
+        // StaticBatchingUtility.Combine(this.gameObject);
+
     }
 
 
     public void GenerateBlocks()
     {
-        if (blockParent == null) blockParent = Instantiate(new GameObject(), transform);
-        blockParent.name = "Generated Terrain";
-        if (objects != null)
-        foreach (GameObject element in objects)
+
+        if (blockParent == null)
         {
-            Destroy(element);
+            blockParent = new GameObject();
+            blockParent.transform.parent = transform;
+            blockParent.transform.localPosition = Vector3.zero;
+            blockParent.name = "Generated Terrain";
+       
         }
+        if (objects != null)
+            foreach (GameObject element in objects)
+            {
+                Destroy(element);
+            }
 
         objects = new GameObject[xSize, zSize];
-     
+
         for (int x = 0; x < xSize; x++)
         {
             for (int z = 0; z < zSize; z++)
             {
                 objects[x, z] = Instantiate(prefab, new Vector3(x+transform.position.x,0,z+transform.position.z),Quaternion.identity,blockParent.transform);
-                
+                 objects[x, z].name = "block";
 
             }
         }
+
     }
-    
+
     public void OnValidate()
     {
-       if (generate)
+        if (generate)
         {
             generate = false;
             GenerateBlocks();
             GeneratePerlin();
         }
-        
-        if (Application.isPlaying&&objects != null) GeneratePerlin();
+
+        if (Application.isPlaying && objects != null) GeneratePerlin();
 
     }
 }

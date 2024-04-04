@@ -10,7 +10,7 @@ public class PerlinTest : MonoBehaviour
     public float Frequency;
     private float trueFrequency = 1.1f;
     public float FrameLimit = 1;
-  
+
     //
     public GameObject prefab;
     public GameObject[,] objects;
@@ -42,7 +42,7 @@ public class PerlinTest : MonoBehaviour
                 objects[x, z] = Instantiate(prefab, transform);
                 if (stopwatch.Elapsed.TotalSeconds > FrameLimit)
                 {
-                    
+
                     stopwatch.Restart();
                     UnityEngine.Debug.Log("stopped frame while instantiatingg  ");
                     yield return new WaitForSeconds(0);
@@ -64,7 +64,7 @@ public class PerlinTest : MonoBehaviour
             {
                 for (int z = 0; z < objects.GetLength(1); z++)
                 {
-                    
+
                     if (stopwatch.Elapsed.TotalSeconds > FrameLimit)
                     {
                         stopwatch.Restart();
@@ -75,7 +75,7 @@ public class PerlinTest : MonoBehaviour
                     float nz = (float)z;
                     float noise = Mathf.PerlinNoise(nx * trueFrequency, nz * trueFrequency);
                     GameObject current = objects[x, z];
-                    current.transform.position = new Vector3(x * 1.1f, noise*10, z * 1.1f);
+                    current.transform.position = new Vector3(x * 1.1f, noise * 10, z * 1.1f);
                     current.GetComponent<MeshRenderer>().material = noise <= waterLevel ? Water : ground;
 
                 }

@@ -1,21 +1,17 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class ChunkScript : MonoBehaviour
 {
     public static int size = 16;
-    private GameObject[,] myBlocks = new GameObject[16,16];
+    private GameObject[,] myBlocks = new GameObject[16, 16];
     public GameObject prefab;
     public PerlinNoise noisemap;
     [HideInInspector] public bool Priority = false;
     private void Start()
     {
         GenerateChunk();
-        
+
     }
 
     private async void GenerateChunk()
