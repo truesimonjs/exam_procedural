@@ -12,13 +12,14 @@ public class ChunkRender : MonoBehaviour
     }
     private void Update()
     {
-        if (Vector3.Distance(transform.position, player.position) < renderDistance)
+        Vector3 noHeiDist = new Vector3(transform.position.x-player.position.x, 0, transform.position.z-player.position.z);
+        if (Vector3.Distance(Vector3.zero,noHeiDist) < renderDistance)
         {
             for (int i = 1; i < 5; i++)
             {
                 int x, z;
                 utillity.DirectionLoop(i, out x, out z);
-           
+                Debug.Log(x + " " + z);
                 x += perlinMaster.chunkPos.x;
                 z += perlinMaster.chunkPos.y;
                 if (x < 0 || z < 0) continue;

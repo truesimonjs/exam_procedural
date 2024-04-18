@@ -31,7 +31,7 @@ public class PerlinMaster : MonoBehaviour
         chunks[x, z] = this;
 
         GenerateBlocks();
-        //GeneratePerlin();
+        GeneratePerlin();
 
     }
     public void GeneratePerlin()

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce28d943552b7024ba85952ad9e3dcce, type: 3}
+  m_Name: HENRIK 3
+  m_EditorClassIdentifier: 
+  seed: {x: 809.1, y: 285.9}
+  ridged: 0
+  Frequency: 0.25
+  min: 0
+  octaves: 4
+  splines:
+  - {x: 0.08, y: 65.5}
+  - {x: 0.46, y: 77.9}
+  - {x: 0.62, y: 150}
+  - {x: 0.82, y: 200}
+  xSize: 100
+  ySize: 100
