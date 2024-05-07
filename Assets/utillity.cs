@@ -11,11 +11,11 @@ public class utillity : MonoBehaviour
         y =  (i - 3) * (i % 2 - 1) * -1;
         */
 
-        
+
         int ueven = (i % 2); //even numbers affect y uneven numbers affect x
         x = (i - 2) * ueven;
         y = (i - 3) * (ueven - 1) * -1;
-        
+
 
     }
 }

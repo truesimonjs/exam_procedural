@@ -4,8 +4,8 @@ using UnityEngine;
 public class PerlinMaster : MonoBehaviour
 {
     public static PerlinMaster[,] chunks = new PerlinMaster[100, 100];
-    public int xSize;
-    public int zSize;
+    public static int xSize = 100;
+    public static int zSize = 100;
     //
     public Vector2Int chunkPos;
     public bool generate = false;
@@ -25,10 +25,13 @@ public class PerlinMaster : MonoBehaviour
     {
 
 
-        int x = (int)transform.position.x / xSize;
-        int z = (int)transform.position.z / zSize;
-        chunkPos = new Vector2Int(x, z);
+        // int x = (int)transform.position.x / xSize;
+        // int z = (int)transform.position.z / zSize;
+        //chunkPos = new Vector2Int(x, z);
+        int x = chunkPos.x;
+        int z = chunkPos.y;
         chunks[x, z] = this;
+        transform.position = new Vector3(x * xSize, 0, z * zSize);
 
         GenerateBlocks();
         GeneratePerlin();
@@ -68,7 +71,7 @@ public class PerlinMaster : MonoBehaviour
             blockParent.transform.parent = transform;
             blockParent.transform.localPosition = Vector3.zero;
             blockParent.name = "Generated Terrain";
-       
+
         }
         if (objects != null)
             foreach (GameObject element in objects)
@@ -82,8 +85,8 @@ public class PerlinMaster : MonoBehaviour
         {
             for (int z = 0; z < zSize; z++)
             {
-                objects[x, z] = Instantiate(prefab, new Vector3(x+transform.position.x,0,z+transform.position.z),Quaternion.identity,blockParent.transform);
-                 objects[x, z].name = "block";
+                objects[x, z] = Instantiate(prefab, new Vector3((x - xSize / 2) + transform.position.x, 0, (z - zSize / 2) + transform.position.z), Quaternion.identity, blockParent.transform);
+                objects[x, z].name = "block";
 
             }
         }

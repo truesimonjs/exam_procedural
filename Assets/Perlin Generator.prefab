@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8104464657208298430}
   - component: {fileID: 7416681607480388910}
   - component: {fileID: 4970251337388921944}
+  - component: {fileID: 6955828598575890358}
   m_Layer: 0
   m_Name: Perlin Generator
   m_TagString: Untagged
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xSize: 100
   zSize: 100
-  chunkPos: {x: 0, y: 0}
+  chunkPos: {x: 2, y: 2}
   generate: 0
   waterLevel: 75
   sameHeight: 0
@@ -75,3 +76,17 @@ MonoBehaviour:
   prefab: {fileID: 8635846995776380635, guid: 1fc561f404dbb05439d96c2835208cfd, type: 3}
   ground: {fileID: 2100000, guid: bf9f75127af669c48a7d3d3961dc2461, type: 2}
   Water: {fileID: 2100000, guid: 991adaece502ba44295a462a743df928, type: 2}
+--- !u!114 &6955828598575890358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957724968563622489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4225afeb2d183146a5d427c51c61b42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderDistance: 100
+  player: {fileID: 0}
