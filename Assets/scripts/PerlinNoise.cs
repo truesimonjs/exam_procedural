@@ -38,43 +38,8 @@ public class PerlinNoise : ScriptableObject
 
 
     }
-    //deprecated
-    public float[,] GeneratePerlin(int sizeX, int sizeY)
-    {
-        Debug.Log("generateperlin");
-        float trueFrequency = Frequency / 100;
-        float[,] newMap = new float[sizeX, sizeY];
-
-
-        for (int x = 0; x < newMap.GetLength(0); x++)
-        {
-            for (int z = 0; z < newMap.GetLength(1); z++)
-            {
-
-
-                float nx = (float)x + seed.x;
-                float ny = (float)z + seed.y;
-                float noise = 0;
-                for (int i = 1; i <= octaves; i++)
-                {
-                    noise += Mathf.PerlinNoise(nx * trueFrequency * i, ny * trueFrequency * i) / octaves;
-
-                }
-
-                if (ridged) noise = Mathf.Abs((noise - 0.5f) * 2);
-                noise = UseSplines(noise);
-                newMap[x, z] = noise;
-
-
-            }
-
-
-        }
-        map = newMap;
-        xSize = map.GetLength(0);
-        ySize = map.GetLength(1);
-        return newMap;
-    }
+  
+    
     public float UseSplines(float input)
     {
         if (splines.Count == 0) return input;
