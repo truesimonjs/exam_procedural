@@ -52,7 +52,7 @@ public class PerlinNoise : ScriptableObject
         float t = Mathf.InverseLerp(splines[startSpline].x, splines[startSpline + 1].x, input);
 
         return (int)Mathf.Lerp(splines[startSpline].y, splines[startSpline + 1].y, t);
-
+        
     }
     private void OnValidate()
     {

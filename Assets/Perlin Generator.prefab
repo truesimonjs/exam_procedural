@@ -66,8 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a06b477eaab1845bf8808321ed19d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 100
-  zSize: 100
   chunkPos: {x: 2, y: 2}
   generate: 0
   waterLevel: 75
@@ -88,5 +86,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4225afeb2d183146a5d427c51c61b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderDistance: 100
   player: {fileID: 0}
