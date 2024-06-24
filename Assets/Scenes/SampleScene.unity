@@ -321,7 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterPrefab: {fileID: 8957724968563622489, guid: 7036204d9cdce8644bc4d27271b496e7, type: 3}
-  renderDistance: 100
+  renderDistance: 200
+  missingChunks: []
 --- !u!4 &1004254945
 Transform:
   m_ObjectHideFlags: 0

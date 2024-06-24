@@ -27,13 +27,15 @@ public class PerlinMaster : MonoBehaviour
     }
     private void Start()
     {
-        int x = chunkPos.x;
-        int z = chunkPos.y;
-        chunks[x, z] = this;
-        transform.position = new Vector3(x * xSize, 0, z * zSize);
+      
+        transform.position = new Vector3(chunkPos.x * xSize, 0, chunkPos.y * zSize);
+        GameMaster.instance.missingChunks.Add(this);
+
+    }
+    public void Activate()
+    {
         GenerateBlocks();
         GeneratePerlin();
-
     }
     public void GeneratePerlin()
     {

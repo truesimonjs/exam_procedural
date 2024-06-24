@@ -38,6 +38,8 @@ public class ChunkRender : MonoBehaviour
         }
 
     }
+
+
     private bool isWithinRender()
     {
         Vector3 noHeiDist = new Vector3(transform.position.x - player.position.x, 0, transform.position.z - player.position.z);
