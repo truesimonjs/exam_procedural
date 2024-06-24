@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 public class PerlinMaster : MonoBehaviour
 {
@@ -8,7 +9,6 @@ public class PerlinMaster : MonoBehaviour
     public static int zSize = 100;
     //
     public Vector2Int chunkPos;
-    public bool generate = false;
     public float waterLevel = 0.5f;
     public bool sameHeight = false;
     //perlin noises
@@ -32,10 +32,11 @@ public class PerlinMaster : MonoBehaviour
         GameMaster.instance.missingChunks.Add(this);
 
     }
-    public void Activate()
+    public async Task Activate()
     {
-        GenerateBlocks();
-        GeneratePerlin();
+           Task task = GenerateBlocks();
+           await task;
+            GeneratePerlin();
     }
     public void GeneratePerlin()
     {
@@ -60,9 +61,9 @@ public class PerlinMaster : MonoBehaviour
     }
 
 
-    public void GenerateBlocks()
+    public async Task GenerateBlocks()
     {
-
+        const float frameLimit = 1000/30;
         if (blockParent == null)
         {
             blockParent = new GameObject();
@@ -79,13 +80,20 @@ public class PerlinMaster : MonoBehaviour
             }
 
         objects = new GameObject[xSize, zSize];
-
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+        
         for (int x = 0; x < xSize; x++)
         {
             for (int z = 0; z < zSize; z++)
             {
                 objects[x, z] = Instantiate(prefab, new Vector3((x - xSize / 2) + transform.position.x, 0, (z - zSize / 2) + transform.position.z), Quaternion.identity, blockParent.transform);
                 objects[x, z].name = "block";
+                if (stopwatch.ElapsedMilliseconds > frameLimit)
+                {
+                    await Task.Yield();
+                    stopwatch.Restart();
+                }
 
             }
         }
@@ -94,12 +102,7 @@ public class PerlinMaster : MonoBehaviour
 
     public void OnValidate()
     {
-        if (generate)
-        {
-            generate = false;
-            GenerateBlocks();
-            GeneratePerlin();
-        }
+        
 
         if (Application.isPlaying && objects != null) GeneratePerlin();
 

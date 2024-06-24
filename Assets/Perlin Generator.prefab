@@ -67,7 +67,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunkPos: {x: 2, y: 2}
-  generate: 0
   waterLevel: 75
   sameHeight: 0
   perlinNoise: {fileID: 11400000, guid: 1bdec8c3aeb82e040b5b9180a4e053a8, type: 2}
