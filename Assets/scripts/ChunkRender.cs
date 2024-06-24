@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ChunkRender : MonoBehaviour
 {
-    public static float renderDistance = 200;
+    
     public Transform player;
     PerlinMaster perlinMaster;
     private void Start()
@@ -17,14 +17,14 @@ public class ChunkRender : MonoBehaviour
 
         for (int i = 1; i < 5; i++)
         {
-            int x, z;
-            utillity.DirectionLoop(i, out x, out z);
+            
+            utillity.DirectionLoop(i, out int x, out int z);
             Debug.Log(x + " " + z);
 
             x += perlinMaster.chunkPos.x;
             z += perlinMaster.chunkPos.y;
             Vector3 noHeiDist = new Vector3(x * 100 - player.position.x, 0, z * 100 - player.position.z);
-            if (Vector3.Distance(Vector3.zero, noHeiDist) > renderDistance) continue;
+            if (Vector3.Distance(Vector3.zero, noHeiDist) > GameMaster.instance.renderDistance) continue;
             if (x < 0 || z < 0) continue;
 
             if (PerlinMaster.chunks[x, z] == null)
@@ -41,7 +41,7 @@ public class ChunkRender : MonoBehaviour
     private bool isWithinRender()
     {
         Vector3 noHeiDist = new Vector3(transform.position.x - player.position.x, 0, transform.position.z - player.position.z);
-        bool withinRender = Vector3.Distance(Vector3.zero, noHeiDist) <= renderDistance;
+        bool withinRender = Vector3.Distance(Vector3.zero, noHeiDist) <= GameMaster.instance.renderDistance;
         if (withinRender) return true;
         gameObject.SetActive(false);
         return false;

@@ -39,8 +39,6 @@ public class PerlinMaster : MonoBehaviour
     }
     public void GeneratePerlin()
     {
-        //float[,] waterMap = waterPerlin.GeneratePerlin(xSize, zSize);
-        //float[,] map =  perlinNoise.GeneratePerlin(xSize,zSize);
 
         for (int x = 0; x < xSize; x++)
         {
@@ -57,7 +55,7 @@ public class PerlinMaster : MonoBehaviour
 
             }
         }
-        // StaticBatchingUtility.Combine(this.gameObject);
+        // StaticBatchingUtility.Combine(blockParent);
 
     }
 
@@ -73,6 +71,7 @@ public class PerlinMaster : MonoBehaviour
             blockParent.name = "Generated Terrain";
 
         }
+
         if (objects != null)
             foreach (GameObject element in objects)
             {

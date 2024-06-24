@@ -8,6 +8,7 @@ public class utillity : MonoBehaviour
         int uneven = (i % 2); 
         x = (i - 2) * uneven;
         y = (i - 3) * (uneven - 1) * -1;
+        
         /*
          x on 1 and 3
         1 -2= -1

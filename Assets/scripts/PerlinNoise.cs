@@ -9,7 +9,7 @@ public class PerlinNoise : ScriptableObject
     public float Frequency;
     public float min;
     public int octaves = 1;
-    public float[,] map;
+    //public float[,] map;
     public List<Vector2> splines = new List<Vector2>();
     public int xSize;
     public int ySize;
@@ -56,9 +56,12 @@ public class PerlinNoise : ScriptableObject
     }
     private void OnValidate()
     {
-        GameObject.FindFirstObjectByType<PerlinMaster>()?.OnValidate();
-
-
+        //GameObject.FindFirstObjectByType<PerlinMaster>()?.OnValidate();
+        PerlinMaster[] masters = GameObject.FindObjectsByType<PerlinMaster>(FindObjectsSortMode.None);
+        foreach (PerlinMaster master in masters)
+        {
+            master.OnValidate();
+        }
     }
 }
 
