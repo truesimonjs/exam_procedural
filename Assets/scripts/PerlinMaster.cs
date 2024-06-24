@@ -21,18 +21,16 @@ public class PerlinMaster : MonoBehaviour
     //material
     public Material ground;
     public Material Water;
+    private void Awake()
+    {
+        
+    }
     private void Start()
     {
-
-
-        // int x = (int)transform.position.x / xSize;
-        // int z = (int)transform.position.z / zSize;
-        //chunkPos = new Vector2Int(x, z);
         int x = chunkPos.x;
         int z = chunkPos.y;
         chunks[x, z] = this;
         transform.position = new Vector3(x * xSize, 0, z * zSize);
-
         GenerateBlocks();
         GeneratePerlin();
 
@@ -55,7 +53,7 @@ public class PerlinMaster : MonoBehaviour
 
             }
         }
-        // StaticBatchingUtility.Combine(blockParent);
+        StaticBatchingUtility.Combine(blockParent);
 
     }
 

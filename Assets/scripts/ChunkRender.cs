@@ -31,7 +31,7 @@ public class ChunkRender : MonoBehaviour
             {
                 PerlinMaster Pm = Instantiate(GameMaster.instance.masterPrefab, new Vector3(x * 100, 0, z * 100), Quaternion.identity).GetComponent<PerlinMaster>();
                 Pm.chunkPos = new Vector2Int(x, z);
-
+                PerlinMaster.chunks[x, z] = Pm;
             }
             else PerlinMaster.chunks[x, z].gameObject.SetActive(true);
             
